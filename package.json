@@ -1,0 +1,26 @@
+{
+  "name": "crowdfundingblockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-local-blockchain": "hardhat node",
+    "start-hardhat-console": "hardhat console --network localhost",
+    "create": "hardhat run src/scripts/create.js --network localhost",
+    "upgrade": "hardhat run src/scripts/upgrade.js --network localhost",
+    "test": "hardhat test --network localhost",
+    "slither": "slither src/contracts/CrowdFunding.sol --solc-remaps @openzeppelin/=$(pwd)/node_modules/@openzeppelin/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@openzeppelin/hardhat-upgrades": "^1.22.1",
+    "chai": "^4.3.7",
+    "ethers": "^5.7.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.1",
+    "@openzeppelin/contracts-upgradeable": "^4.8.1"
+  }
+}
