@@ -2,7 +2,7 @@
 
 ## Running the contract
 
-1. From the root directory rename the file `secrets.placeholder.json` with `secrets.json` and make sure that the key `alchemyApiKey` contains the secret api key shared with you.
+1. From the root directory, rename the file `secrets.placeholder.json` to `secrets.json` and ensure that the `alchemyApiKey` key contains the secret API key that was shared with you.
 2. Run `npm i`
 3. Run `npm run start-local-blockchain`
 4. Run `npm test`
