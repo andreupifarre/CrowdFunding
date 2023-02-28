@@ -86,7 +86,10 @@ contract CrowdFunding is
         return campaigns[campaignId].pledges[msg.sender];
     }
 
-    function createCampaign(uint256 target, uint256 deadline) public {
+    function createCampaign(uint256 target, uint256 deadline)
+        public
+        whenNotPaused
+    {
         require(target > 0, "Target must be positive");
         require(deadline > 0, "Deadline must be positive");
 
@@ -103,7 +106,7 @@ contract CrowdFunding is
         emit CampaignCreated(msg.sender, target, deadline, currentTimestamp);
     }
 
-    function pledge(uint256 campaignId, uint256 amount) public {
+    function pledge(uint256 campaignId, uint256 amount) public whenNotPaused {
         Campaign storage campaign = campaigns[campaignId];
         // block.timestamp can be manipulated by miners. Could be improved with:
         // require(block.number < getDeadlineBlockNumber(), "The deadline has passed");
@@ -118,7 +121,11 @@ contract CrowdFunding is
         token.safeTransferFrom(msg.sender, address(this), amount);
     }
 
-    function withdraw(uint256 campaignId) public onlyPledgee(campaignId) {
+    function withdraw(uint256 campaignId)
+        public
+        onlyPledgee(campaignId)
+        whenNotPaused
+    {
         Campaign storage campaign = campaigns[campaignId];
 
         require(
@@ -141,7 +148,11 @@ contract CrowdFunding is
         token.safeTransfer(msg.sender, amount);
     }
 
-    function refund(uint256 campaignId) public onlyPledger(campaignId) {
+    function refund(uint256 campaignId)
+        public
+        onlyPledger(campaignId)
+        whenNotPaused
+    {
         Campaign storage campaign = campaigns[campaignId];
 
         require(
